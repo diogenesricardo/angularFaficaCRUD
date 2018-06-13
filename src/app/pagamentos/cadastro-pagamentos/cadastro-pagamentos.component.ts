@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-cadastro-pagamentos',
   templateUrl: './cadastro-pagamentos.component.html',
-  styleUrls: ['./cadastro-pagamentos.component.css']
+  styleUrls: ['./cadastro-pagamentos.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class CadastroPagamentosComponent implements OnInit {
 
