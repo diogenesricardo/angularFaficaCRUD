@@ -10,9 +10,8 @@ import { PagamentosService } from '../pagamentos.service';
 export class PainelComponent implements OnInit {
 
   pagamentos: Array<any>;
-  descricao: string;
-  dataVencimentoDe: Date;
-  dataVencimentoAte: Date;
+  filtro = new LancamentoFiltro();
+  totalRegistros = 0;
 
   constructor(private pagamentosService: PagamentosService) { }
 
@@ -20,18 +19,15 @@ export class PainelComponent implements OnInit {
     this.listarPagamentos();
   }
 
-  listarPagamentos() {
-
-    const filtro: LancamentoFiltro {
-      descricao: this.descricao,
-      dataVencimentoDe: this.dataVencimentoDe,
-      dataVencimentoAte: this.dataVencimentoAte
-    };
-
-    this.pagamentosService.consultar(filtro).subscribe(
+  listarPagamentos(pagina = 0) {
+    this.filtro.pagina = pagina;
+    this.pagamentosService.consultar(this.filtro).subscribe(
       response => {
         this.pagamentos = response['content'];
+        this.totalRegistros = response['totalElements'];
       }
     );
   }
+
+
 }
