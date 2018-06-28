@@ -1,0 +1,51 @@
+import { Injectable } from '@angular/core';
+import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
+
+import * as moment from 'moment';
+export class PessoaFiltro {
+  nome: string;
+  pagina = 0;
+  itensPorPagina = 5;
+}
+
+@Injectable()
+export class PessoasService {
+
+  pessoasURL = 'http://localhost:8080/pessoas';
+  parameters:  HttpParams;
+
+  constructor(private http: HttpClient) { }
+
+  consultar(filtro: PessoaFiltro) {
+    this.parameters = new HttpParams();
+    if (filtro.nome) { // todo: PROBLEMA DO UNDEFINED
+      this.parameters = this.parameters.set('nome', filtro.nome);
+    }
+    this.parameters = this.parameters.set('page', filtro.pagina.toString());
+    this.parameters = this.parameters.set('size', filtro.itensPorPagina.toString());
+    /* this.parameters.set('descricao', filtro.descricao); */
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Basic YWRtaW46YWRtaW4='
+      }),
+      params: this.parameters /* new HttpParams().set('descricao', filtro.descricao) */
+      /* de: filtro.dataVencimentoDe ? new HttpParams().set('dataVencimentoDe',
+        moment(filtro.dataVencimentoDe).format('YYYY-MM-DD')) : {} */
+    };
+    return this.http.get<Array<any>>(`${this.pessoasURL}`, httpOptions);
+  }
+
+  /*   adicionar(nome: any): Observable<any> {
+      return this.http.post('http://localhost:8080/pessoas', nome);
+    }
+
+    excluir(id: number) {
+      return this.http.delete(`http://localhost:8080/pessoas/${id}`);
+    }
+
+    alterar(funcionario: any): Observable<any> {
+      return this.http.put(`http://localhost:8080/pessoas/${funcionario.id}`, funcionario);
+    }
+  */
+}

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { LazyLoadEvent } from 'primeng/api';
+import { PessoaFiltro, PessoasService } from '../pessoas.service';
 
 @Component({
   selector: 'app-table-pessoas',
@@ -7,12 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TablePessoasComponent {
 
-  pessoas = [
-    { nome: 'Diógenes Ricardo', cidade: 'Caruaru', estado: 'PE', ativo: true },
-    { nome: 'Alef Douglas', cidade: 'Recife', estado: 'PE', ativo: false },
-    { nome: 'Almir Antonio', cidade: 'Agrestina', estado: 'PE', ativo: true },
-    { nome: 'Amanda Maria', cidade: 'Jataúba', estado: 'PB', ativo: true },
-    { nome: 'Daniel Gustavo', cidade: 'Caruaru', estado: 'PE', ativo: false },
-    { nome: 'Joice Danilele', cidade: 'Caruaru', estado: 'PE', ativo: true }
-  ];
+  @Input() pessoas: Array<any>;
+  @Input() filtro = new PessoaFiltro();
+  totalRegistros = 0;
+
+  constructor(private pessoaService: PessoasService) { }
+
+  proximaPagina(event: LazyLoadEvent) {
+    this.filtro.pagina = event.first / event.rows;
+    this.pessoaService.consultar(this.filtro).subscribe(
+      response => {
+        this.pessoas = response['content'];
+        console.log(this.pessoas);
+        this.totalRegistros = response['totalElements'];
+      }
+    );
+
+  }
 }

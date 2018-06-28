@@ -19,6 +19,7 @@ import { PainelComponent } from './painel/painel.component';
 import { CadastroPagamentosComponent } from './cadastro-pagamentos/cadastro-pagamentos.component';
 import { SharedModule } from '../shared/shared.module';
 import { PagamentosService } from './pagamentos.service';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 @NgModule({
   imports: [
@@ -44,7 +45,7 @@ import { PagamentosService } from './pagamentos.service';
     PainelComponent,
     TableComponent
   ],
-  providers: [PagamentosService],
+  providers: [PagamentosService, MessageService],
   exports: [
     CadastroPagamentosComponent,
     PainelComponent

@@ -1,20 +1,20 @@
 <div class="container">
-    <div class="ui-g">
-
+  <div class="ui-g">
+    <form autocomplete="off" (ngSubmit)="listarPessoas()">
       <div class="ui-g-12">
         <h1>Clientes</h1>
       </div>
 
       <div class="ui-g-12 ui-fluid">
         <label>Nome</label>
-        <input pInputText type="text">
+        <input pInputText type="text" [(ngModel)]="filtro.nome" name="nome">
       </div>
 
       <div class="ui-g-12">
         <button pButton type="submit" label="Pesquisar"></button>
       </div>
-
-    </div>
-
-    <app-table-pessoas></app-table-pessoas>
+    </form>
   </div>
+
+  <app-table-pessoas [(pessoas)] = pessoas [(filtro)] = filtro></app-table-pessoas>
+</div>

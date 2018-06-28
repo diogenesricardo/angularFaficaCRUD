@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { catchError, retry } from 'rxjs/operators';
 
 import * as moment from 'moment';
 export class LancamentoFiltro {
@@ -15,7 +16,7 @@ export class LancamentoFiltro {
 export class PagamentosService {
 
   pagamentosURL = 'http://localhost:8080/lancamentos';
-  parameters:  HttpParams;
+  parameters: HttpParams;
 
   constructor(private http: HttpClient) { }
 
@@ -50,13 +51,19 @@ export class PagamentosService {
   /*   adicionar(nome: any): Observable<any> {
       return this.http.post('http://localhost:8080/pessoas', nome);
     }
+*/
+  excluir(id: number) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Basic YWRtaW46YWRtaW4='
+      }),
+      params: this.parameters
+    };
+    return this.http.delete(`${this.pagamentosURL}/${id}`, httpOptions);
+  }
 
-    excluir(id: number) {
-      return this.http.delete(`http://localhost:8080/pessoas/${id}`);
-    }
+  /*     alterar(funcionario: any): Observable<any> {
+        return this.http.put(`http://localhost:8080/pessoas/${funcionario.id}`, funcionario);
+      } */
 
-    alterar(funcionario: any): Observable<any> {
-      return this.http.put(`http://localhost:8080/pessoas/${funcionario.id}`, funcionario);
-    }
-  */
 }

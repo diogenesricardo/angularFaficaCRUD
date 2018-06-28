@@ -1,3 +1,4 @@
+import { PessoasService } from './pessoas.service';
 import { TablePessoasComponent } from './table-pessoas/table-pessoas.component';
 import { PainelPessoasComponent } from './painel-pessoas/painel-pessoas.component';
 import { CadastroClientesComponent } from './cadastro-clientes/cadastro-clientes.component';
@@ -13,10 +14,12 @@ import { ButtonModule } from 'primeng/components/button/button';
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 import { TooltipModule } from 'primeng/tooltip';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
 
     InputTextModule,
     ButtonModule,
@@ -37,6 +40,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
   exports: [
     CadastroClientesComponent,
     PainelPessoasComponent
-  ]
+  ],
+  providers: [PessoasService]
 })
 export class ClientesModule { }

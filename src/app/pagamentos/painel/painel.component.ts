@@ -22,12 +22,14 @@ export class PainelComponent implements OnInit {
   listarPagamentos(pagina = 0) {
     this.filtro.pagina = pagina;
     this.pagamentosService.consultar(this.filtro).subscribe(
-      response => {
+      /* response => {
         this.pagamentos = response['content'];
         this.totalRegistros = response['totalElements'];
-      }
+      } */
     );
   }
+
+
 
 
 }

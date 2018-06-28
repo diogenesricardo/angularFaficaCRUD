@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {GrowlModule} from 'primeng/growl';
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
@@ -19,7 +20,8 @@ import { ClientesModule } from './clientes/clientes.module';
 
     ClientesModule,
     CoreModule,
-    PagamentosModule
+    PagamentosModule,
+    GrowlModule
   ],
   providers: [],
   bootstrap: [AppComponent]
