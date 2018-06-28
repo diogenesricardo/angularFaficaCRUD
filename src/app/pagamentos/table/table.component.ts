@@ -1,6 +1,6 @@
 import { PagamentosService, LancamentoFiltro } from './../pagamentos.service';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { LazyLoadEvent, Message } from 'primeng/api';
+import { LazyLoadEvent, Message, ConfirmationService } from 'primeng/api';
 
 import { MessageService } from 'primeng/components/common/messageservice';
 
@@ -18,7 +18,9 @@ export class TableComponent {
   totalRegistros = 0;
   @ViewChild('tabelaPagamentos') tabelaLancamentos;
 
-  constructor(private pagamentosService: PagamentosService, private messageService: MessageService) { }
+  constructor(private pagamentosService: PagamentosService,
+    private confirmationService: ConfirmationService ,
+    private messageService: MessageService) { }
 
   proximaPagina(event: LazyLoadEvent) {
     this.filtro.pagina = event.first / event.rows;
@@ -28,6 +30,15 @@ export class TableComponent {
         this.totalRegistros = response['totalElements'];
       }
     );
+  }
+
+  confirmarExclusao(lancamento: any) {
+    this.confirmationService.confirm({
+      message: 'Tem certeza que deseja excluir?',
+      accept: () => {
+          this.excluir(lancamento);
+      }
+  });
   }
 
   excluir(lancamento: any) {
