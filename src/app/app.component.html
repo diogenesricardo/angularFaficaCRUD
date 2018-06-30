@@ -1,12 +1,6 @@
 <app-menu></app-menu>
 <!-- <app-cadastro-pagamentos></app-cadastro-pagamentos> -->
-<app-painel></app-painel>
+<!-- <app-painel></app-painel> -->
 <!-- <app-cadastro-clientes></app-cadastro-clientes> -->
-<!-- <app-painel-pessoas></app-painel-pessoas> -->
-<p-confirmDialog header="Confirmação" icon="fa fa-question-circle" width="425" #cd  >
-    <p-footer>
-        <button type="button" pButton icon="fas fa-check-circle" label="Sim" (click)="cd.accept()"></button>
-        <button type="button" pButton icon="fas fa-times-circle" label="Não" (click)="cd.reject()"></button>
-    </p-footer>
-</p-confirmDialog>
-<p-growl [(value)]="msgs"></p-growl>
+<app-painel-pessoas></app-painel-pessoas>
+<app-utils></app-utils>

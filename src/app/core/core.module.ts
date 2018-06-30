@@ -1,16 +1,31 @@
-import { MenuComponent } from './menu/menu.component';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { MenubarModule } from 'primeng/menubar';
+import { GrowlModule } from 'primeng/growl';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+
+import { MenuComponent } from './menu/menu.component';
+import { ErrorHandlerService } from './error-handler.service';
+import { ConfirmationService } from 'primeng/api';
+import { UtilsComponent } from './utils/utils.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    MenubarModule
+    MenubarModule,
+
+    GrowlModule,
+    ConfirmDialogModule,
   ],
-  declarations: [MenuComponent],
+  declarations: [MenuComponent, UtilsComponent],
   exports: [
-    MenuComponent
+    MenuComponent, UtilsComponent
+  ],
+  providers: [
+    ErrorHandlerService,
+    ConfirmationService,
+    { provide: LOCALE_ID, useValue: 'pt-BR' }
   ]
 })
 export class CoreModule { }

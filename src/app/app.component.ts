@@ -8,5 +8,5 @@ import { Message } from 'primeng/api';
 })
 export class AppComponent {
   title = 'app';
-  msgs: Message[] = [];
+
 }

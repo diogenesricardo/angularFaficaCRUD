@@ -3,6 +3,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { LazyLoadEvent, Message, ConfirmationService } from 'primeng/api';
 
 import { MessageService } from 'primeng/components/common/messageservice';
+import { ErrorHandlerService } from '../../core/error-handler.service';
 
 
 
@@ -20,7 +21,9 @@ export class TableComponent {
 
   constructor(private pagamentosService: PagamentosService,
     private confirmationService: ConfirmationService ,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private errorHanler: ErrorHandlerService
+  ) { }
 
   proximaPagina(event: LazyLoadEvent) {
     this.filtro.pagina = event.first / event.rows;
@@ -28,7 +31,7 @@ export class TableComponent {
       response => {
         this.pagamentos = response['content'];
         this.totalRegistros = response['totalElements'];
-      }
+      }, error => this.errorHanler.handler(error)
     );
   }
 
@@ -47,7 +50,7 @@ export class TableComponent {
         console.log('excluido');
         this.listarPagamentos(this.filtro.pagina);
         this.messageService.add({severity: 'info', summary: 'Atualização', detail: 'Lançamento excluído com sucesso'});
-      }
+      }, error => this.errorHanler.handler(error)
     );
   }
 
@@ -57,7 +60,7 @@ export class TableComponent {
       response => {
         this.pagamentos = response['content'];
         this.totalRegistros = response['totalElements'];
-      }
+      }, error => this.errorHanler.handler(error)
     );
   }
 
