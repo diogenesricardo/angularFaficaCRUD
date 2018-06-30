@@ -36,6 +36,16 @@ export class PessoasService {
     return this.http.get<Array<any>>(`${this.pessoasURL}`, httpOptions);
   }
 
+  excluir(id: number) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Basic YWRtaW46YWRtaW4='
+      }),
+      params: this.parameters
+    };
+    return this.http.delete(`${this.pessoasURL}/${id}`, httpOptions);
+  }
+
   /*   adicionar(nome: any): Observable<any> {
       return this.http.post('http://localhost:8080/pessoas', nome);
     }

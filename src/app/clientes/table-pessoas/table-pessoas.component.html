@@ -2,7 +2,7 @@
   <div class="ui-g">
     <div class="ui-g-12">
       <p-table [value]="pessoas" [paginator]="true" [rows]="filtro.itensPorPagina" [responsive]=true [lazy]=true emptyMessage="Nenhum encontrado"
-        [totalRecords]=t otalRegistros (onLazyLoad)=proximaPagina($event)>
+        [totalRecords]=totalRegistros (onLazyLoad)=proximaPagina($event)>
         <ng-template pTemplate="header">
           <tr>
             <th>Nome</th>

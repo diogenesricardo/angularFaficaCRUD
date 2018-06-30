@@ -14,11 +14,13 @@ export class ErrorHandlerService {
     if (erroResponse === 'string') {
       msg = erroResponse;
     } else {
-      msg = 'Erro ao processar serviço';
       console.log('ocorreu um erro', erroResponse);
+      if (erroResponse.status === 404) {
+        this.messageService.add({ severity: 'error', summary: 'Contate o administrador', detail: erroResponse.error.msgUsuario });
+      } else {
+        this.messageService.add({ severity: 'error', summary: 'Contate o administrador', detail: 'Erro na operação com recurso' });
+      }
     }
-
-    this.messageService.add({ severity: 'error', summary: 'Erro!', detail: 'Contate o administrador' });
 
   }
 
