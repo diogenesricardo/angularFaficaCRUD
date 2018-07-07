@@ -1,3 +1,4 @@
+import { Lancamento } from './../core/model/Lancamento';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
@@ -48,10 +49,16 @@ export class PagamentosService {
     return this.http.get<Array<any>>(`${this.pagamentosURL}?resumo`, httpOptions);
   }
 
-  /*   adicionar(nome: any): Observable<any> {
-      return this.http.post('http://localhost:8080/pessoas', nome);
-    }
-*/
+  adicionar(lancamento: Lancamento): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Basic YWRtaW46YWRtaW4=',
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.post<Lancamento>(this.pagamentosURL, lancamento, httpOptions);
+  }
+
   excluir(id: number) {
     const httpOptions = {
       headers: new HttpHeaders({

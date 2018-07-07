@@ -1,3 +1,4 @@
+import { PagamentosService } from './../pagamentos.service';
 import { FormControl } from '@angular/forms';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
@@ -5,6 +6,7 @@ import { Lancamento } from './../../core/model/Lancamento';
 import { PessoasService } from './../../clientes/pessoas.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { CategoriaService } from './../../categorias/categoria.service';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 @Component({
   selector: 'app-cadastro-pagamentos',
@@ -17,12 +19,14 @@ export class CadastroPagamentosComponent implements OnInit {
   constructor (
     private categoriaService: CategoriaService,
     private errorHanler: ErrorHandlerService,
-    private pessoaService: PessoasService
+    private pessoaService: PessoasService,
+    private pagamentoService: PagamentosService,
+    private messageService: MessageService
   ) { }
 
   tipos = [
-    { label: 'Entrada', value: 'entrada' },
-    { label: 'Saída', value: 'saida' }
+    { label: 'Entrada', value: 'RECEITA' },
+    { label: 'Saída', value: 'DESPESA' }
   ];
 
   categorias = [];
@@ -45,14 +49,20 @@ export class CadastroPagamentosComponent implements OnInit {
   carregarPessoas() {
     return this.pessoaService.listar().subscribe(
       response => {
-        // this.pessoas = response['content'];
         this.pessoas = response['content'].map(p => ({label: p.nome, value: p.id}));
       }, error => this.errorHanler.handler(error)
     );
   }
 
   salvar(form: FormControl) {
-    console.log(this.lancamento);
+    this.pagamentoService.adicionar(this.lancamento).subscribe(
+      response => {
+        this.messageService.add({severity: 'info', summary: 'Sucesso', detail: 'Lancamento efetuado com sucesso'});
+        form.reset(); // resetando o formulario
+        this.lancamento = new Lancamento(); // limpando o objeto
+      }, error => this.errorHanler.handler(error)
+    );
+
 
   }
 
