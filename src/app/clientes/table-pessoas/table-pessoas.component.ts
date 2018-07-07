@@ -45,7 +45,6 @@ export class TablePessoasComponent {
   excluir(pessoa: any) {
     this.pessoaService.excluir(pessoa.id).subscribe(
       response => {
-        console.log('excluido');
         this.listarPessoas(this.filtro.pagina);
         this.messageService.add({severity: 'info', summary: 'Atualização', detail: 'Pessoa excluída com sucesso'});
       }, error => this.errorHanler.handler(error)
@@ -61,4 +60,19 @@ export class TablePessoasComponent {
       }, error => this.errorHanler.handler(error)
     );
   }
+
+  ativarPessoa(pessoa: any) {
+    this.pessoaService.ativar(pessoa).subscribe(
+      response => {
+        this.listarPessoas(this.filtro.pagina);
+        let status = 'ativada';
+        if (pessoa.ativo === true) {
+          status = 'desativada';
+        }
+        this.messageService.add({severity: 'info', summary: 'Ativação', detail: 'Pessoa ' + status});
+      } , error => this.errorHanler.handler(error)
+    );
+  }
+
+
 }

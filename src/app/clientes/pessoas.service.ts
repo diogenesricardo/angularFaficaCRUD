@@ -46,6 +46,29 @@ export class PessoasService {
     return this.http.delete(`${this.pessoasURL}/${id}`, httpOptions);
   }
 
+  ativar(pessoa: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Basic YWRtaW46YWRtaW4=',
+        'Content-Type': 'application/json'
+      })
+    };
+    let ativo = true;
+    if (pessoa.ativo === true) {
+      ativo = false;
+    }
+    return this.http.put(`${this.pessoasURL}/${pessoa.id}/ativo`, ativo , httpOptions);
+  }
+
+  listar() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Basic YWRtaW46YWRtaW4='
+      })
+    };
+    return this.http.get<Array<any>>(`${this.pessoasURL}`, httpOptions);
+  }
+
   /*   adicionar(nome: any): Observable<any> {
       return this.http.post('http://localhost:8080/pessoas', nome);
     }
