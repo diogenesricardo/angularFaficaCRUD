@@ -11,13 +11,13 @@
 
   <ul class="navbar-menu" [hidden]="!exibindoMenu">
     <li class="navbar-usuario">Usuário: Diógenes</li>
-    <li class="navbar-menuitem">
-      <a href="#">Pagamentos</a>
+    <li class="navbar-menuitem" routerLinkActive="ativo">
+      <a routerLink="/pagamentos">Pagamentos</a>
     </li>
-    <li class="navbar-menuitem">
-      <a href="#">Pessoas</a>
+    <li class="navbar-menuitem" routerLinkActive="ativo">
+      <a routerLink="/clientes">Pessoas</a>
     </li>
-    <li class="navbar-menuitem">
+    <li class="navbar-menuitem" routerLinkActive="ativo">
       <a href="#">Logout</a>
     </li>
   </ul>

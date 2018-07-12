@@ -1,7 +1,9 @@
+import { Pessoa } from './../core/model/Pessoa';
 import { Injectable } from '@angular/core';
 import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 
 import * as moment from 'moment';
+import { Observable } from 'rxjs/Observable';
 export class PessoaFiltro {
   nome: string;
   pagina = 0;
@@ -69,9 +71,17 @@ export class PessoasService {
     return this.http.get<Array<any>>(`${this.pessoasURL}`, httpOptions);
   }
 
-  /*   adicionar(nome: any): Observable<any> {
-      return this.http.post('http://localhost:8080/pessoas', nome);
-    }
+  adicionar(pessoa: Pessoa): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Basic YWRtaW46YWRtaW4=',
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.post<Pessoa>(this.pessoasURL, pessoa, httpOptions);
+  }
+
+  /*
 
     excluir(id: number) {
       return this.http.delete(`http://localhost:8080/pessoas/${id}`);

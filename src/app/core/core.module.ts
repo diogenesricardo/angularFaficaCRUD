@@ -9,11 +9,13 @@ import { MenuComponent } from './menu/menu.component';
 import { ErrorHandlerService } from './error-handler.service';
 import { ConfirmationService } from 'primeng/api';
 import { UtilsComponent } from './utils/utils.component';
+import { RouterModule } from '../../../node_modules/@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
     MenubarModule,
+    RouterModule,
 
     GrowlModule,
     ConfirmDialogModule,

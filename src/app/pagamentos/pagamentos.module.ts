@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '../../../node_modules/@angular/router';
 
 import { ButtonModule } from 'primeng/components/button/button';
 import { TooltipModule } from 'primeng/tooltip';
@@ -26,6 +27,7 @@ import { MessageService } from 'primeng/components/common/messageservice';
     CommonModule,
     FormsModule,
     HttpClientModule,
+    RouterModule,
 
     ButtonModule,
     InputTextModule,

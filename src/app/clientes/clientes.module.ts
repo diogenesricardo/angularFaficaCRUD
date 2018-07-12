@@ -18,10 +18,12 @@ import { PessoasService } from './pessoas.service';
 import { TablePessoasComponent } from './table-pessoas/table-pessoas.component';
 import { PainelPessoasComponent } from './painel-pessoas/painel-pessoas.component';
 import { CadastroClientesComponent } from './cadastro-clientes/cadastro-clientes.component';
+import { RouterModule } from '../../../node_modules/@angular/router';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    RouterModule,
 
     InputTextModule,
     ButtonModule,

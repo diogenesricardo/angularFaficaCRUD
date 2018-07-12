@@ -1,5 +1,5 @@
 <div class="container">
-    <form autocomplete="off">
+    <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
 
       <div class="ui-g">
         <div class="ui-g-12">
@@ -8,49 +8,49 @@
 
         <div class="ui-g-12 ui-fluid">
           <label>Nome</label>
-          <input pInputText type="text">
+          <input pInputText type="text" [(ngModel)]="pessoa.nome" name="pessoa.nome">
         </div>
 
         <div class="ui-g-12 ui-md-9 ui-fluid">
           <label>Logradouro</label>
-          <input pInputText type="text">
+          <input pInputText type="text"[(ngModel)]="pessoa.end.logradouro" name="logradouro">
         </div>
 
         <div class="ui-g-12 ui-md-3 ui-fluid">
           <label>Número</label>
-          <input pInputText type="text">
+          <input pInputText type="text" [(ngModel)]="pessoa.end.numero" name="numero">
         </div>
 
         <div class="ui-g-12 ui-md-4 ui-fluid">
           <label>Complemento</label>
-          <input pInputText type="text">
+          <input pInputText type="text" [(ngModel)]="pessoa.end.complemento" name="complemento">
         </div>
 
         <div class="ui-g-12 ui-md-4 ui-fluid">
           <label>Bairro</label>
-          <input pInputText type="text">
+          <input pInputText type="text" [(ngModel)]="pessoa.end.bairro" name="bairro">
         </div>
 
         <div class="ui-g-12 ui-md-4 ui-fluid">
           <label>CEP</label>
-          <p-inputMask mask="99999-999"></p-inputMask>
+          <p-inputMask mask="99999-999" [(ngModel)]="pessoa.end.cep" name="cep"></p-inputMask>
         </div>
 
         <div class="ui-g-12 ui-md-6 ui-fluid">
           <label>Cidade</label>
-          <input pInputText type="text">
+          <input pInputText type="text" [(ngModel)]="pessoa.end.cidade" name="cidade">
         </div>
 
         <div class="ui-g-12 ui-md-6 ui-fluid">
           <label>Estado</label>
-          <input pInputText type="text">
+          <input pInputText type="text" [(ngModel)]="pessoa.end.estado" name="estado">
         </div>
 
         <div class="ui-g-12">
           <button pButton type="submit" label="Salvar"></button>
           <button pButton type="button" label="Novo" class="ui-button-info"></button>
 
-          <a href="javascript:;">Voltar para a pesquisa</a>
+          <a routerLink="/clientes">Voltar para a pesquisa</a>
         </div>
       </div>
 
