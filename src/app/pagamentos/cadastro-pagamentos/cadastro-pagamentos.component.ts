@@ -7,9 +7,10 @@ import { PessoasService } from './../../clientes/pessoas.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { CategoriaService } from './../../categorias/categoria.service';
 import { MessageService } from 'primeng/components/common/messageservice';
-import { ActivatedRoute } from '../../../../node_modules/@angular/router';
+import { ActivatedRoute, Router } from '../../../../node_modules/@angular/router';
 
 import * as moment from 'moment';
+import { Title } from '../../../../node_modules/@angular/platform-browser';
 
 @Component({
   selector: 'app-cadastro-pagamentos',
@@ -27,19 +28,24 @@ export class CadastroPagamentosComponent implements OnInit {
     { label: 'Saída', value: 'DESPESA' }
   ];
 
+
   constructor(
     private categoriaService: CategoriaService,
     private errorHanler: ErrorHandlerService,
     private messageService: MessageService,
     private pessoaService: PessoasService,
     private pagamentoService: PagamentosService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private title: Title
   ) { }
 
   ngOnInit() {
+    this.title.setTitle('Cadastro de pagamentos');
     /* console.log(this.route.snapshot.params['id']); */
     const codigolancamento = this.route.snapshot.params['id'];
     if (codigolancamento) {
+      this.title.setTitle('Editar de pagamento');
       this.carregarPagamento(codigolancamento);
     }
 
@@ -79,8 +85,13 @@ export class CadastroPagamentosComponent implements OnInit {
     this.pagamentoService.adicionar(this.lancamento).subscribe(
       response => {
         this.messageService.add({ severity: 'info', summary: 'Sucesso', detail: 'Lancamento efetuado com sucesso' });
-        form.reset(); // resetando o formulario
-        this.lancamento = new Lancamento(); // limpando o objeto
+
+        /*      DESSA FORMA SE QUISERMOS RESETAR O FORMUÁRIO
+         form.reset(); // resetando o formulario
+        this.lancamento = new Lancamento(); // limpando o objeto */
+
+        /* E ASSIM SE QUISERMOS NAVEGAR PARA OUTRA ROTA */
+        this.router.navigate(['/pagamentos', response.id]);
       }, error => this.errorHanler.handler(error)
     );
   }
@@ -114,6 +125,11 @@ export class CadastroPagamentosComponent implements OnInit {
           'YYYY-MM-DD').toDate();
       }
     }
+  }
+
+  novo(form: FormControl) {
+    form.reset();
+    this.router.navigate(['/pagamentos/novo']);
   }
 
 

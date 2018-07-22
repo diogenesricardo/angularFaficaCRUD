@@ -10,6 +10,8 @@ import { ErrorHandlerService } from './error-handler.service';
 import { ConfirmationService } from 'primeng/api';
 import { UtilsComponent } from './utils/utils.component';
 import { RouterModule } from '../../../node_modules/@angular/router';
+import { NaoEncontradaComponent } from './nao-encontrada.component';
+import { Title } from '../../../node_modules/@angular/platform-browser';
 
 @NgModule({
   imports: [
@@ -18,15 +20,17 @@ import { RouterModule } from '../../../node_modules/@angular/router';
     RouterModule,
 
     GrowlModule,
-    ConfirmDialogModule,
+    ConfirmDialogModule
   ],
-  declarations: [MenuComponent, UtilsComponent],
+  declarations: [MenuComponent, UtilsComponent, NaoEncontradaComponent],
   exports: [
     MenuComponent, UtilsComponent
   ],
   providers: [
     ErrorHandlerService,
     ConfirmationService,
+    Title,
+
     { provide: LOCALE_ID, useValue: 'pt-BR' }
   ]
 })

@@ -4,6 +4,7 @@ import { LazyLoadEvent, Message, ConfirmationService } from 'primeng/api';
 
 import { MessageService } from 'primeng/components/common/messageservice';
 import { ErrorHandlerService } from '../../core/error-handler.service';
+import { Title } from '../../../../node_modules/@angular/platform-browser';
 
 
 
@@ -12,7 +13,7 @@ import { ErrorHandlerService } from '../../core/error-handler.service';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
-export class TableComponent {
+export class TableComponent implements OnInit {
 
   @Input() pagamentos: Array<any>;
   @Input() filtro = new LancamentoFiltro();
@@ -22,8 +23,14 @@ export class TableComponent {
   constructor(private pagamentosService: PagamentosService,
     private confirmationService: ConfirmationService ,
     private messageService: MessageService,
-    private errorHanler: ErrorHandlerService
+    private errorHanler: ErrorHandlerService,
+    private title: Title
   ) { }
+
+  ngOnInit(): void {
+    this.title.setTitle('Pesquisa de Pagamentos');
+
+  }
 
   proximaPagina(event: LazyLoadEvent) {
     this.filtro.pagina = event.first / event.rows;

@@ -49,8 +49,8 @@ import { MessageService } from 'primeng/components/common/messageservice';
   ],
   providers: [PagamentosService, MessageService],
   exports: [
-    CadastroPagamentosComponent,
-    PainelComponent
+    /* CadastroPagamentosComponent,
+    PainelComponent */
   ]
 })
 export class PagamentosModule { }

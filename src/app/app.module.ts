@@ -8,6 +8,7 @@ import { CoreModule } from './core/core.module';
 import { PagamentosModule } from './pagamentos/pagamentos.module';
 import { ClientesModule } from './clientes/clientes.module';
 
+import { NaoEncontradaComponent } from './core/nao-encontrada.component';
 import { PainelComponent } from './pagamentos/painel/painel.component';
 import { CadastroPagamentosComponent } from './pagamentos/cadastro-pagamentos/cadastro-pagamentos.component';
 import { CadastroClientesComponent } from './clientes/cadastro-clientes/cadastro-clientes.component';
@@ -20,12 +21,15 @@ import { registerLocaleData } from '@angular/common';
 registerLocaleData(localePt, 'pt-BR');
 
 const routes: Routes = [
+  { path: '', redirectTo: 'pagamentos', pathMatch: 'full' },
   { path: 'pagamentos', component: PainelComponent },
   { path: 'pagamentos/novo', component: CadastroPagamentosComponent },
   { path: 'pagamentos/:id', component: CadastroPagamentosComponent },
   { path: 'clientes', component: PainelPessoasComponent },
   { path: 'clientes/novo', component: CadastroClientesComponent },
-  { path: 'clientes/:id', component: CadastroClientesComponent }
+  { path: 'clientes/:id', component: CadastroClientesComponent },
+  { path: 'pagina-nao-encontrada', component: NaoEncontradaComponent },
+  { path: '**', component: NaoEncontradaComponent }
 ];
 
 @NgModule({

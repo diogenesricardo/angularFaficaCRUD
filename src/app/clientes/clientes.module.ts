@@ -42,8 +42,8 @@ import { RouterModule } from '../../../node_modules/@angular/router';
     TablePessoasComponent
   ],
   exports: [
-    CadastroClientesComponent,
-    PainelPessoasComponent
+/*     CadastroClientesComponent,
+    PainelPessoasComponent */
   ],
   providers: [PessoasService, CategoriaService]
 })
