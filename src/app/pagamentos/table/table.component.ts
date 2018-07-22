@@ -47,7 +47,6 @@ export class TableComponent {
   excluir(lancamento: any) {
     this.pagamentosService.excluir(lancamento.id).subscribe(
       response => {
-        console.log('excluido');
         this.listarPagamentos(this.filtro.pagina);
         this.messageService.add({severity: 'info', summary: 'Atualização', detail: 'Lançamento excluído com sucesso'});
       }, error => this.errorHanler.handler(error)

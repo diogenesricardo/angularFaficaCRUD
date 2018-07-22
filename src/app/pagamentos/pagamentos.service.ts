@@ -23,7 +23,6 @@ export class PagamentosService {
 
   consultar(filtro: LancamentoFiltro) {
     this.parameters = new HttpParams();
-    console.log(moment(filtro.dataVencimentoDe).format('YYYY-MM-DD') + filtro.descricao + filtro.dataVencimentoAte);
     if (filtro.descricao) { // todo: PROBLEMA DO UNDEFINED
       this.parameters = this.parameters.set('descricao', filtro.descricao);
     }
@@ -69,8 +68,23 @@ export class PagamentosService {
     return this.http.delete(`${this.pagamentosURL}/${id}`, httpOptions);
   }
 
-  /*     alterar(funcionario: any): Observable<any> {
-        return this.http.put(`http://localhost:8080/pessoas/${funcionario.id}`, funcionario);
-      } */
+  listarPagamento(id: number) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Basic YWRtaW46YWRtaW4='
+      })
+    };
+    return this.http.get<Lancamento>(`${this.pagamentosURL}/${id}`, httpOptions);
+  }
+
+  alterar(lancamento: Lancamento) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Basic YWRtaW46YWRtaW4=',
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.put<Lancamento>(`${this.pagamentosURL}/${lancamento.id}`, lancamento, httpOptions);
+  }
 
 }

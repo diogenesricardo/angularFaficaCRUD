@@ -71,6 +71,15 @@ export class PessoasService {
     return this.http.get<Array<any>>(`${this.pessoasURL}`, httpOptions);
   }
 
+  listarPessoa(id: number) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Basic YWRtaW46YWRtaW4='
+      })
+    };
+    return this.http.get<Array<any>>(`${this.pessoasURL}/${id}`, httpOptions);
+  }
+
   adicionar(pessoa: Pessoa): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({

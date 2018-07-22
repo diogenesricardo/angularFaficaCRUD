@@ -9,6 +9,8 @@ import { CategoriaService } from './../../categorias/categoria.service';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { ActivatedRoute } from '../../../../node_modules/@angular/router';
 
+import * as moment from 'moment';
+
 @Component({
   selector: 'app-cadastro-pagamentos',
   templateUrl: './cadastro-pagamentos.component.html',
@@ -35,10 +37,18 @@ export class CadastroPagamentosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.route.snapshot.params['id']);
+    /* console.log(this.route.snapshot.params['id']); */
+    const codigolancamento = this.route.snapshot.params['id'];
+    if (codigolancamento) {
+      this.carregarPagamento(codigolancamento);
+    }
 
     this.carregarCategorias();
     this.carregarPessoas();
+  }
+
+  get isEditando() {
+    return Boolean(this.lancamento.id);
   }
 
   carregarCategorias() {
@@ -58,6 +68,14 @@ export class CadastroPagamentosComponent implements OnInit {
   }
 
   salvar(form: FormControl) {
+    if (this.isEditando) {
+      this.atualizarLancamento(form);
+    } else {
+      this.adicionarLancamento(form);
+    }
+  }
+
+  adicionarLancamento(form: FormControl) {
     this.pagamentoService.adicionar(this.lancamento).subscribe(
       response => {
         this.messageService.add({ severity: 'info', summary: 'Sucesso', detail: 'Lancamento efetuado com sucesso' });
@@ -67,6 +85,36 @@ export class CadastroPagamentosComponent implements OnInit {
     );
   }
 
+  atualizarLancamento(form: FormControl) {
+    this.pagamentoService.alterar(this.lancamento).subscribe(
+      response => {
+        this.lancamento = response;
+        this.messageService.add({ severity: 'info', summary: 'Sucesso', detail: 'Lancamento atualizado com sucesso' });
+      }, error => this.errorHanler.handler(error)
+    );
+  }
+
+  carregarPagamento(id: number) {
+    this.pagamentoService.listarPagamento(id).subscribe(
+      response => {
+        this.converterStringsParaDatas([response]);
+        this.lancamento = response;
+      }, error => this.errorHanler.handler(error)
+    );
+  }
+
+  private converterStringsParaDatas(lancamentos: Lancamento[]) {
+    for (const lancamento of lancamentos) {
+      if (lancamento.dataVencimento) {
+        lancamento.dataVencimento = moment(lancamento.dataVencimento,
+          'YYYY-MM-DD').toDate();
+      }
+      if (lancamento.dataPagamento) {
+        lancamento.dataPagamento = moment(lancamento.dataPagamento,
+          'YYYY-MM-DD').toDate();
+      }
+    }
+  }
 
 
 
