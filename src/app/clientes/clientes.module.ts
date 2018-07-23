@@ -19,6 +19,7 @@ import { TablePessoasComponent } from './table-pessoas/table-pessoas.component';
 import { PainelPessoasComponent } from './painel-pessoas/painel-pessoas.component';
 import { CadastroClientesComponent } from './cadastro-clientes/cadastro-clientes.component';
 import { RouterModule } from '../../../node_modules/@angular/router';
+import { ClientesRoutingModule } from './clientes-routing.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -34,7 +35,9 @@ import { RouterModule } from '../../../node_modules/@angular/router';
     BrowserAnimationsModule,
     SelectButtonModule,
     DropdownModule,
-    InputMaskModule
+    InputMaskModule,
+
+    ClientesRoutingModule
   ],
   declarations: [
     CadastroClientesComponent,

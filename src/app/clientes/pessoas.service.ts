@@ -77,7 +77,7 @@ export class PessoasService {
         'Authorization': 'Basic YWRtaW46YWRtaW4='
       })
     };
-    return this.http.get<Array<any>>(`${this.pessoasURL}/${id}`, httpOptions);
+    return this.http.get<Pessoa>(`${this.pessoasURL}/${id}`, httpOptions);
   }
 
   adicionar(pessoa: Pessoa): Observable<any> {

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '../../../node_modules/@angular/router';
 
 import { ButtonModule } from 'primeng/components/button/button';
 import { TooltipModule } from 'primeng/tooltip';
@@ -21,13 +20,13 @@ import { CadastroPagamentosComponent } from './cadastro-pagamentos/cadastro-paga
 import { SharedModule } from '../shared/shared.module';
 import { PagamentosService } from './pagamentos.service';
 import { MessageService } from 'primeng/components/common/messageservice';
+import { PagamentosRoutingModule } from './pagamentos-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     HttpClientModule,
-    RouterModule,
 
     ButtonModule,
     InputTextModule,
@@ -39,6 +38,8 @@ import { MessageService } from 'primeng/components/common/messageservice';
     SelectButtonModule,
     DropdownModule,
     CurrencyMaskModule,
+
+    PagamentosRoutingModule,
 
     SharedModule
   ],

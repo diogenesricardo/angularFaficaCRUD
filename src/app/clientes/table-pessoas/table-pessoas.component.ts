@@ -27,7 +27,6 @@ export class TablePessoasComponent {
     this.pessoaService.consultar(this.filtro).subscribe(
       response => {
         this.pessoas = response['content'];
-        console.log(this.pessoas);
         this.totalRegistros = response['totalElements'];
       }
     );
@@ -71,6 +70,16 @@ export class TablePessoasComponent {
         }
         this.messageService.add({severity: 'info', summary: 'Ativação', detail: 'Pessoa ' + status});
       } , error => this.errorHanler.handler(error)
+    );
+  }
+
+  listarPessoa(pagina = 0) {
+    this.filtro.pagina = pagina;
+    this.pessoaService.consultar(this.filtro).subscribe(
+      response => {
+        this.pessoas = response['content'];
+        this.totalRegistros = response['totalElements'];
+      }, error => this.errorHanler.handler(error)
     );
   }
 

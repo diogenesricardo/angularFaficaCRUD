@@ -3,7 +3,7 @@
 
       <div class="ui-g">
         <div class="ui-g-12">
-          <h1>Nova Pessoa</h1>
+          <h1>{{isEditando ? 'Edição de': 'Novo'}} Cliente</h1>
         </div>
 
         <div class="ui-g-12 ui-fluid">
@@ -13,7 +13,7 @@
 
         <div class="ui-g-12 ui-md-9 ui-fluid">
           <label>Logradouro</label>
-          <input pInputText type="text"[(ngModel)]="pessoa.end.logradouro" name="logradouro">
+          <input pInputText type="text" [(ngModel)]="pessoa.end.logradouro" name="logradouro">
         </div>
 
         <div class="ui-g-12 ui-md-3 ui-fluid">
